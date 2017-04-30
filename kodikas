@@ -1,0 +1,32 @@
+#include <Smartcar.h>
+
+int led1 = 4;
+SR04 front ;
+const int trig_pin = 5;
+const int echo_pin = 6;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  front.attach(trig_pin, echo_pin);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  int distance = front.getMedianDistance();
+  delay(5000);
+
+  led1 = led1 + 1;
+  if (led1 > 10) {
+    led1 = 4;
+  }
+  if (distance < 3) {
+    digitalWrite(led1, HIGH);
+  }
+}
